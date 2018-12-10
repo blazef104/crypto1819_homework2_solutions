@@ -1,0 +1,87 @@
+\chapter{Exercise 1}
+\section{point a}
+
+Suppose we have the given scheme $\Pi$ and the CPA game
+
+\begin{figure}[h!]
+   \centering
+   \sdinit{}
+   \begin{tikzpicture}[scale=0.8]
+      \sdbegin{}
+      \newinst{A}{$ \A $}
+      \newinst[4]{B}{$ C_{\Pi} $}
+      
+            \postlevel
+            \mess{A}{$m_{i}$}{B}
+            \node[anchor=west] at (mess to) {  };
+            \postlevel
+            \mess{B}{$c_{i}$}{A}
+            \node[anchor=west] at (mess from) {$ r \leftarrow\$
+            \{0,1\}^{\frac{n}{2}}, c=P_{k}(r\| m_{i})$  };
+           \draw [->] (1.2,-3.3) to[out=240,in=110] (1.2,-1.3); 
+            \postlevel
+            \mess{A}{$m^{*}_{0}$,$m^{*}_{1}$}{B}
+            \node[anchor=west] at (mess to) {  };
+                  \postlevel
+                  \mess{B}{$c^{*}$}{A}
+                  \node[anchor=west] at (mess from) {\shortstack[l]{
+                          $ b \leftarrow\$ \{0,1\}   $ 
+                        \\
+                    $  r^{*} \leftarrow\$ \{0,1\}^{\frac{n}{2}}  $
+            \\
+    $c^{*}=P_{k}(r^{*}\| m_{b})$}};
+            
+            \postlevel
+            \mess{A}{$m_{i}$}{B}
+            \node[anchor=west] at (mess to) {  };
+            \postlevel
+            \mess{B}{$c_{i}$}{A}
+            \node[anchor=west] at (mess to) {  };
+           \draw [->] (1.2,-7.9) to[out=240,in=110] (1.2,-6.3); 
+            \postlevel
+            \mess{A}{$b'$}{B}
+            \node[anchor=west] at (mess to) {Output 1 IFF $b' = b$  };
+
+      \sdend{}
+      \sdend{}
+   \end{tikzpicture}
+\end{figure}
+
+
+If $P$ is a PRP family, $\Pi$ is always CPA secure unless a \textit{bad event }
+happens.\\
+
+Suppose $m^{*}_{0}$ and $m^{*}_{1}$ have already been sent multiple times to
+$\C_{\Pi}$ and that $\A$ collected , at most, \textit{poly} couples containing
+$(m^{*}_{0} \text{ or } m^{*}_{1}, c' )$. It could happen that, sent  $m^{*}_{0}$ and
+$m^{*}_{1}$ as challenge messages, $\A$ receives one of the previuosly received
+$c'$. In that case, $\A$ knows which message has been encrypted, then he can
+easily win the game.\\
+
+What is the probability $\A$ can win in this way?\\
+When $c^{*}=P_{k}(r^{*}\|m_{b})$ where $r^{*}$ was already chosen by $\C$
+in a previuos request of $m_{b}$ (where $b$ can be 0 or 1), $\A$ can win.
+Let's call $r_{b}$ a random number chosen when $m_{b}$ was sent to $\C$:
+    \begin{gather*}
+        \P [ \a \text{ wins } ] = \P [r^{*}= r_{b} \wedge m_{b} \text{ is chosen for
+        encryption } ]=\\
+        = \P [ m_{b} ] \P [ r^{*}=r_{b} ]=\\
+        =\frac{1}{2} \frac{1}{2^{\frac{n}{2}}} \text{(for $m_{b}$ asked just
+        once)}\\
+        =\frac{1}{2} \frac{q}{2^{\frac{n}{2}}} \text{(for $m_{b}$ asked q times)}
+    \end{gather*}
+
+    Since $b \leftarrow\$ \{0,1\}$ and  
+$\P [r^{*}= r_{0} \wedge m_{0} \text{ is chosen for
+        encryption } ]$ and $\P [r^{*}= r_{1} \wedge m_{1} \text{ is chosen for
+        encryption } ]$ are disjoint probabilities, the probabilities of the two
+        events is the sum of single probabilities.\\
+
+        So, $\A$ wins with probability at least
+        $\frac{1}{2^{\frac{n}{2}}}$, at most $\frac{q}{2^{\frac{n}{2}}}$, which
+        is still negligible since q can be , at most, \textit{poly}.\\ 
+
+
+\section{point b}
+
+

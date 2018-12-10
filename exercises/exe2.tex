@@ -1,0 +1,76 @@
+\chapter*{Exercise 2}
+
+\section{point a}
+\subsection{ i}%
+
+\[
+    \H \text{ is CRHF } \Rightarrow \H \text{ is OWF}
+\]
+To show this property, let's make a reduction:
+
+\begin{figure}[h!]
+   \centering
+   \sdinit{}
+   \begin{tikzpicture}
+      \sdbegin{}
+      \newinst{A}{$ \A'^{OWF} $}
+      \newinst[4]{B}{$ \A $}
+      \newinst[4]{C}{$\C^{CRHF}$}
+
+      \postlevel
+      \mess{C}{$s$}{B}
+      \node[anchor=west] at (mess from) {\shortstack[l]{
+      		$  s \leftarrow\$ \{0,1\}^{\lambda} 
+      		  $ 
+            \\
+            $    $ }};
+      \postlevel
+      \mess{B}{$s, y=H_{s}(x)$}{A}
+      \node[anchor=west] at (mess from) {\shortstack[l]{
+      		$  x \leftarrow\$ \{0,1\}^{2n} 
+      		  $ 
+             }};
+      \postlevel
+      \mess{A}{$x'$}{B}
+      \node[anchor=west] at (mess to) {  };
+      \postlevel
+      \mess{B}{$x, x'$}{C}
+      \node[anchor=west] at (mess to) {  };
+
+
+      \sdend{}
+      \sdend{}
+   \end{tikzpicture}
+\end{figure}
+
+When does not $\A$ win?\\
+Since CRHF game  wants the final couple $(x, x')$ with $x\not= x'$, if
+$\A'^{OWF}$ returns $x'=x$ the CRHF game doesn't work.\\
+
+This \textbf{BAD} event happens with 
+\[
+    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [
+    X=x] \P [ X'=x ] = \frac{1}{2^{2n}}        
+\].
+\subsection{ ii}%
+
+If functions from $\H$ family aren't compressing, the probability of
+\textbf{BAD} event changes:
+\[
+    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [
+    X=x] \P [ X'=x ] = \frac{1}{2^{n}}        
+\].
+
+Now, if our functions from $\H$ were compressing (from 2n bits to n bits), the
+best CRHF function (the function with the minimum number of collisions) had
+$2^{n} + 1 $ inputs generating a collision (in the same codomain's element).\\
+
+In this case, the best possible CRHF function is bijective (since it could be a
+permutation over $2^{n}$ elements).\\
+
+In general, for non-compressing functions we can show that 
+\[
+    \H \text{ is CRHF mapping n bits to n bits}  \Rightarrow \H \text{ is OWF}
+\]
+
+with the same reduction of the above \textbf{point i} .
