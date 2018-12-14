@@ -1,0 +1,131 @@
+\\chapter*{Exercise 5}
+
+\subsection{point a}
+
+We want to break the following game:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A $}
+       \newinst[4]{B}{$\C^{CCA2}$}
+       \postlevel
+       
+       \mess{A}{$m^*,\sigma^*$}{B}
+       \node[anchor=west] at (mess to) { output 1 IFF $Vrf(\sigma^*,S_k)=m^*$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+We win in this way:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A $}
+       \newinst[4]{B}{$\C^{CCA2}$}
+       \postlevel
+       
+       \mess{A}{$m^e,m$}{B}
+       \node[anchor=west] at (mess to) { $Vrf(m,S_k)=m^e=m^*$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+%
+\subsection{point b}
+
+We want to break the following game when $m^*$ is fixed:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A $}
+       \newinst[4]{B}{$\C^{CCA2}$}
+       \postlevel
+       
+       \mess{A}{$m$}{B}
+       \mess{B}{$\sigma$}{A}
+       \postlevel
+       
+       \mess{A}{$m^*,\sigma^*$}{B}
+       \node[anchor=west] at (mess to) { output 1 IFF $Vrf(\sigma^*,S_k)=m^*$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+We can win in the following way:
+
+\begin{itemize}
+    \item Select $r \in \Z_n^*$
+    \item Compute $r^{-1}$ 
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A $}
+       \newinst[4]{B}{$\C^{CCA2}$}
+       \postlevel
+       
+       \mess{A}{$m*\times r^e$}{B}
+       \mess{B}{$\sigma$}{A}
+       \node[anchor=west] at (mess from) { $\sigma=m^{*d}\times r$ };
+       \postlevel
+       
+       \mess{A}{$m^*, \sigma*$}{B}
+       \node[anchor=east] at (mess from) { $\sigma^{*}=\frac{\sigma}{r}$ };
+       \node[anchor=west] at (mess to) { \shortstack{$Vrf(\sigma^{*e},S_k)=$\\$=\sigma^*=m^{*de}=m^*$} };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+\subsection{point c}
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A $}
+       \newinst[4]{B}{$ \C $}
+       \postlevel
+       
+       \mess{B}{$m*,P_k$}{A}
+       \node[anchor=west] at (mess from) { $m^*\leftarrow\$ \Z_N^*$ };
+       \postlevel
+
+       \mess{B}{$m_i,\sigma_i$}{A}
+       \node[anchor=west] at (mess from) { \shortstack{$m_i\leftarrow\$ \Z_N^*$\\$\sigma_i=m_i^{S_k}mod N$} };
+       \draw [->] (1.1,-4.3) to[out=240,in=120] (1.2,-3.3);
+       \postlevel
+       
+       \mess{A}{$m^*, \sigma*$}{B}
+       \node[anchor=west] at (mess to) { $Vrf(\sigma^*,P_k)=m^*$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}

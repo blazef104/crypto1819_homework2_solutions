@@ -1,0 +1,156 @@
+\chapter*{Exercise 4}
+
+\subsection{point a}
+
+Formal definition of CCA1. Consider the following $GAME^{CCA}$
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A_{(P_{kb})} $}
+       \newinst[4]{B}{$\C^{CCA1}_{(P_{kb},S_{kb})}$}
+       \postlevel
+       
+       \mess{A}{$c$}{B}
+       \node[anchor=east] at (mess from) { $Enc(P_k,m)=c$ };
+       \mess{B}{m}{A}
+       \draw [->] (1.1,-3.3) to[out=220,in=110] (1.2,-2.3);
+       \postlevel
+       
+       \mess{A}{$m^*_0,m^*_1$}{B}
+       \node[anchor=west] at (mess to) { $b\leftarrow\$ \{0,1\}$ };
+       \mess{B}{$c^*$}{A}
+       \postlevel
+
+       \mess{A}{$b'$}{B}
+       \node[anchor=west] at (mess to) { output 1 IFF $b=b'$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+$$Pr[A(\lambda, 0)=1]-Pr[A(\lambda,1)=1]$$
+\todo{Put an explanation and finalize probability}
+
+\newpage
+\subsection{point b}
+
+CCA1 $\implies$ CPA
+
+Assume $\exists \A^{CPA}$ which is able to break $CPA$. $\A^{CCA1}$ will use this $\A^{CPA}$ to break $CCA1$  
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A^{CPA} $}
+       \newinst[4]{B}{$\A^{CCA1}$}
+       \newinst[4]{C}{$\C^{CCA1}$}
+       \postlevel
+       
+       \mess{B}{$c$}{C}
+       \mess{C}{m}{B}
+       \draw [->] (6.8,-3.3) to[out=220,in=110] (6.8,-2.3);
+       \postlevel
+       
+       \mess{A}{$m^*_0,m^*_1$}{B}
+       \node[anchor=west] at (mess to) { };
+       \mess{B}{$c^*$}{A}
+       \postlevel
+
+       \mess{B}{$m^*_0,m^*_1$}{C}
+       \node[anchor=west] at (mess to) { };
+       \mess{C}{$c^*$}{B}
+       \postlevel
+
+       \mess{A}{$b'$}{B}
+       \mess{B}{$b'$}{C}
+       \node[anchor=west] at (mess to) { output 1 IFF $b=b'$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\noindent Intuitively this works because we used CPA to define CCA security. Therefore if an attacker is able to break CPA he is also "automatically" able to break CCA (the challenge part is the same for both games).
+
+\bigskip
+$PKE^{CPA} \implies CCA1$
+
+Now consider the following Game which is still CPA secure but on the other hand it leaks the key whenever $C$ receives a decryption query.
+
+The scheme is defined as follows
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A_{(P_{kb})} $}
+       \newinst[4]{B}{$\C^{CCA1}_{(P_{kb},S_{kb})}$}
+       \postlevel
+       
+       \mess{A}{$c_i$}{B}
+       \node[anchor=east] at (mess from) { $Enc(P_k,m)=c$ };
+       \node[anchor=west] at (mess to) { $Dec(S_k,c)=m,x$ };
+       \mess{B}{$m_i,x$}{A}
+       \draw [->] (1.1,-3.3) to[out=220,in=110] (1.2,-2.3);
+       \postlevel
+       
+       \mess{A}{$m^*_0,m^*_1$}{B}
+       \node[anchor=west] at (mess to) { $b\leftarrow\$ \{0,1\}$ };
+       \mess{B}{$c^*$}{A}
+       \node[anchor=east] at (mess to) { $Dec(x,c)=m',x$ };
+       \postlevel
+
+       \mess{A}{$b'$}{B}
+       \node[anchor=west] at (mess to) { output 1 IFF $b=b'$ };
+       \node[anchor=east] at (mess from) { check if $m'=m_1$ or $m'=m_0$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\subsection{point c}
+\subsubsection{point i}
+
+My goal is to demostrate if PI is CCA1 -> PI' is also CCA1, in order to this observe the following reduction scheme:
+
+
+A'(PI')  A  C
+
+
+A'sends a message m composed by 't' elements. A takes every single elements and sends to C to get the cyphertexts of each.
+Then recombines the cyphertext and sends back the single cyphertext to A'.
+
+At the start of the challenge, A' sends to messages: m0, m1 of 't' bytes to A.
+A sends to C the t-1 bytes of m0 and receives thr corrispondent t-1 cyphertext then A sends to C two bytes:
+m0t and 1, and receive the cyphertext c*' of one of these.
+At this point A recombines all of the t-1 cyphertext + the last received, c*' and sends back to A'.
+Now if A' distinguishes that c* is the cyphertext of m0 sends b' in the other case C has enrypted the fixed byte and send BOT.
+
+At the end if A receives b', sends b', if receives BOT sends 0.
+
+\subsubsection{point ii}
+
+$\Pi$ CCA2 $\implies$ $\Pi' \neg$CCA2
+
+Consider the following PKE Scheme:
+\begin{itemize}
+    \item $Enc(P_k,m[t])=Enc(P_k,m_1)||...||Enc(P_k,m_t)$
+    \item $Dec(S_k,c[t])=Dec(S_k,c_1)||...||Dec(S_k,c_t)$
+\end{itemize}
+Since in CCA2 I can make decryption queries after the challenge, I can create a $c'\neq c^*$ just by inverting the first two bits of $c^*$ ($c*=c_1^*||c_2^*||...||c^*_t$ now $c'=c_2^*||c_1^*||...||c^*_t$). Now when I receive the decrypted message I can simply switch the first two bits again and discover which of the two challenge messages was encrypted.
+
+\subsection{point d}
+
+From the definition of padded-RSA I can construct the following attack:
+
+Suppose we do the challenge query, when I receive $C^*$ I will have something in this form: $c^*=(r||m_b)^e mod N$. Now, since RSA is malleable, I can change $C^*$ in order to be able to ask a valid decryption query, therefore $C'=C^*\times(r')^e mod N= ((r||m_b) \times r')^e\neq C^*$. Now when I ask for the decryption of $c'$ I will get $m'=((r||m)r')^{ed}=(r||m)r'$ since I know $r'$ I can simply divide $\frac{m'}{r'}$ and take the last l bits. This was the encrypted message in the challenge. 

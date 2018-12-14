@@ -1,6 +1,5 @@
-\chapter{Exercise 1}
+\chapter*{Exercise 1}
 \section{point a}
-
 Suppose we have the given scheme $\Pi$ and the CPA game
 
 \begin{figure}[h!]
@@ -60,26 +59,19 @@ easily win the game.\\
 
 What is the probability $\A$ can win in this way?\\
 When $c^{*}=P_{k}(r^{*}\|m_{b})$ where $r^{*}$ was already chosen by $\C$
-in a previuos request of $m_{b}$ (where $b$ can be 0 or 1), $\A$ can win.
+in a previous request of $m_{b}$ (where $b$ can be 0 or 1), $\A$ can win.
 Let's call $r_{b}$ a random number chosen when $m_{b}$ was sent to $\C$:
-    \begin{gather*}
-        \P [ \a \text{ wins } ] = \P [r^{*}= r_{b} \wedge m_{b} \text{ is chosen for
-        encryption } ]=\\
-        = \P [ m_{b} ] \P [ r^{*}=r_{b} ]=\\
-        =\frac{1}{2} \frac{1}{2^{\frac{n}{2}}} \text{(for $m_{b}$ asked just
-        once)}\\
-        =\frac{1}{2} \frac{q}{2^{\frac{n}{2}}} \text{(for $m_{b}$ asked q times)}
-    \end{gather*}
 
-    Since $b \leftarrow\$ \{0,1\}$ and  
-$\P [r^{*}= r_{0} \wedge m_{0} \text{ is chosen for
-        encryption } ]$ and $\P [r^{*}= r_{1} \wedge m_{1} \text{ is chosen for
-        encryption } ]$ are disjoint probabilities, the probabilities of the two
-        events is the sum of single probabilities.\\
+\begin{gather*}
+Pr[\A \text{ wins } ] = Pr[r^{*}= r_{b} \wedge m_{b} \text{ is chosen for encryption } ]=\\
+= \P [ m_{b} ] \P [ r^{*}=r_{b} ]=\\
+=\frac{1}{2} \frac{1}{2^{\frac{n}{2}}} m_{b} \text{ asked just once}\\
+=\frac{1}{2} \frac{q}{2^{\frac{n}{2}}} m_{b} \text{ asked q times}
+\end{gather*}
 
-        So, $\A$ wins with probability at least
-        $\frac{1}{2^{\frac{n}{2}}}$, at most $\frac{q}{2^{\frac{n}{2}}}$, which
-        is still negligible since q can be , at most, \textit{poly}.\\ 
+Since $b \leftarrow\$ \{0,1\}$ and $\P [r^{*}= r_{0} \wedge m_{0} \text{ is chosen for encryption } ]$ and $\P [r^{*}= r_{1} \wedge m_{1} \text{ is chosen for encryption } ]$ are disjoint probabilities, the probabilities of the two events is the sum of single probabilities.\\
+
+So, $\A$ wins with probability at least $\frac{1}{2^{\frac{n}{2}}}$, at most $\frac{q}{2^{\frac{n}{2}}}$, which is still negligible since q can be , at most, \textit{poly}.\\ 
 
 
 \section{point b}

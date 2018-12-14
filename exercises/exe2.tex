@@ -7,7 +7,6 @@
     \H \text{ is CRHF } \Rightarrow \H \text{ is OWF}
 \]
 To show this property, let's make a reduction:
-
 \begin{figure}[h!]
    \centering
    \sdinit{}
@@ -49,24 +48,21 @@ $\A'^{OWF}$ returns $x'=x$ the CRHF game doesn't work.\\
 
 This \textbf{BAD} event happens with 
 \[
-    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [
-    X=x] \P [ X'=x ] = \frac{1}{2^{2n}}        
+    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [X=x] \P [ X'=x ] = \frac{1}{2^{2n}}        
 \].
 \subsection{ ii}%
 
 If functions from $\H$ family aren't compressing, the probability of
 \textbf{BAD} event changes:
 \[
-    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [
-    X=x] \P [ X'=x ] = \frac{1}{2^{n}}        
+    \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [X=x] \P [ X'=x ] = \frac{1}{2^{n}}        
 \].
 
 Now, if our functions from $\H$ were compressing (from 2n bits to n bits), the
 best CRHF function (the function with the minimum number of collisions) had
 $2^{n} + 1 $ inputs generating a collision (in the same codomain's element).\\
 
-In this case, the best possible CRHF function is bijective (since it could be a
-permutation over $2^{n}$ elements).\\
+In this case, the best possible CRHF function is bijective (since it could be a permutation over $2^{n}$ elements).\\
 
 In general, for non-compressing functions we can show that 
 \[
@@ -74,3 +70,18 @@ In general, for non-compressing functions we can show that
 \]
 
 with the same reduction of the above \textbf{point i} .
+
+\section{point b}
+
+Given $H_{s_1,s_2}^*(x)=H_{s_2}'(H_{s_1}(x))$ from $H^*:4n \rightarrow n$.
+
+We can calculate the probability of collision ($H'(H(x))=H'(H(x'))$) in the above defined function:
+\begin{gather*}
+    Pr[H(x)=H(x') | x \neq x' ]+Pr[H^{*}(x)=H^{*}(H(x')) | H(x) \neq H(x') ]=\\
+    \text{Since the the events are independent, i can write}\\
+    Pr[ x \neq x' ] Pr[ H(x) \neq H(x') ] Pr[ H'(H(x))=H'(H(x')) ] +\\
+    + Pr[ x \neq x' ] Pr[ H(x) = H(x') ] Pr[ H'(H(x))=H'(H(x')) ]\\
+    \text{Now:}\\
+    Pr[ x \neq x' ]=\frac{1}{2^{4n}}+\frac{1}{2^{4n-1}}\\
+    Pr[ ]
+\end{gather*}
