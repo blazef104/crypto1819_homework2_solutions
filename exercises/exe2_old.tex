@@ -1,7 +1,7 @@
 \mychapter{2}{Exercise 2}
 
 \section{point a}
-\subsection{point i}%
+\subsection{ i}%
 
 \[
     \H \text{ is CRHF } \Rightarrow \H \text{ is OWF}
@@ -73,42 +73,15 @@ with the same reduction of the above \textbf{point i} .
 
 \section{point b}
 
-Given $H_{s_1,s_2}^*(x)=H_{s_2}'(H_{s_1}(x))$ with $H^*:4n \rightarrow n$.
-Suppose $\exists A^{H^*}$ which is able to find a collision in $H^*$.
+Given $H_{s_1,s_2}^*(x)=H_{s_2}'(H_{s_1}(x))$ from $H^*:4n \rightarrow n$.
 
-Consider the following two Games:
-\begin{figure}[h!]
-    \centering
-    \sdinit{}
-    \begin{tikzpicture}
-       \sdbegin{}
-       \newinst{A}{$ \A^{H^*} $}
-       \newinst[4]{B}{$ \A $}
-       \newinst[4]{C}{$\C^{H'}$}
- 
-       \postlevel
-       \mess{A}{$x$}{B}
-       \postlevel
-       \mess{B}{$x'$}{C}
-       \node[anchor=east] at (mess from) { $x'=H_{s_1}(x)$ };
-       \postlevel
-
-       \mess{C}{$y$}{B}
-       \node[anchor=west] at (mess from) { $y=H'_{s_2}(x')$ };
-       \mess{B}{$y$}{A}
-       \postlevel
-
-       \mess{A}{$x^*$}{B}
-       \node[anchor=east] at (mess from) { \shortstack{$H^*(x^*)=y$\\and $x^*\neq x$} };
-       \node[anchor=west] at (mess to) { \shortstack[l]{$H_{s_1}(x^*)$\\check$H_{s_1}(x^*)=x'$} };
-       \postlevel
-       \mess{B}{$x^*$}{C}
-       \node[anchor=west] at (mess to) {  };
- 
- 
-       \sdend{}
-       \sdend{}
-    \end{tikzpicture}
-\end{figure}
-
- There is a "BAD event" in which $A^{H^*}$ outputs a collision for $H_{s_1}$, in this case $x^*=x'$ and the second part of the reduction doesn't work. But $Pr[BAD]$ is negligible since 
+We can calculate the probability of collision ($H'(H(x))=H'(H(x'))$) in the above defined function:
+\begin{gather*}
+    Pr[H(x)=H(x') | x \neq x' ]+Pr[H^{*}(x)=H^{*}(H(x')) | H(x) \neq H(x') ]=\\
+    \text{Since the the events are independent, i can write}\\
+    Pr[ x \neq x' ] Pr[ H(x) \neq H(x') ] Pr[ H'(H(x))=H'(H(x')) ] +\\
+    + Pr[ x \neq x' ] Pr[ H(x) = H(x') ] Pr[ H'(H(x))=H'(H(x')) ]\\
+    \text{Now:}\\
+    Pr[ x \neq x' ]=\frac{1}{2^{4n}}+\frac{1}{2^{4n-1}}\\
+    Pr[ ]
+\end{gather*}

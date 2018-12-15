@@ -1,0 +1,156 @@
+\mychapter{6}{Exercise 6}
+\section{point a}
+Active $\implies$ Passive
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{P-ID} $}
+       \newinst[4]{B}{$ \A^{A-ID} $}
+       \newinst[4]{C}{$\C^{A-ID}$}
+
+       \postlevel
+       \mess{C}{$P_k$}{B}
+       \mess{B}{$P_k$}{A}
+       \postlevel
+
+       \mess{A}{"Transcript"}{B}
+       \mess{C}{$\alpha_i$}{B}
+       \mess{B}{$\beta_i$}{C}
+       \mess{C}{$\gamma_i$}{B}
+       \mess{B}{$\tau_i$}{A}
+       \draw [->] (1.1,-6.3) to[out=240,in=120] (1.2,-3.3);
+       \postlevel
+       
+       \mess{A}{$\tau^*$}{B}
+       \mess{B}{$\tau^*$}{C}
+       \node[anchor=west] at (mess to) { \shortstack{Output 1 IFF \\
+       $V(P_k,\tau^*)=1$} };
+ 
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+ \end{figure}
+
+We can construct a $\Pi_BAD$ s.t. Passive $\not\Rightarrow$ Active, where if we play as a dishonest Verifier we can leak the entire $S_k$.
+
+For the passive Game:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}[scale=0.8]
+       \sdbegin{}
+       \newinst{A}{$ \A^{P-ID} $}
+       \newinst[4]{B}{$ \C^{P-ID} $}
+
+       \postlevel
+       \mess{B}{$P_k$}{A}
+       \postlevel
+
+       \mess{A}{"Transcript"}{B}
+       \mess{B}{$\tau_i$}{A}
+       \draw [->] (1.1,-4) to[out=240,in=120] (1.2,-3.0);
+       \postlevel
+       
+       \mess{A}{$\tau^*$}{B}
+       \node[anchor=west] at (mess to) { \shortstack{Output 1 IFF \\
+       $V(P_k,\tau^*)=1$} };
+ 
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+
+Now $\tau_i$ will be as follows, from the point of view of $A$:
+
+\begin{itemize}
+    \item $\alpha\leftarrow U$
+    \item $\beta=b||0$ where $b\leftarrow\$ U$
+    \item $\gamma=\beta[-1](S_k)+(1-\beta[-1])(\alpha \beta)^{S_k}$
+\end{itemize}
+
+So the above ID-scheme has still Passive Security. Instead for the Active Security we can play the following interaction:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{P-ID} $}
+       \newinst[4]{B}{$ \C^{P-ID} $}
+
+       \postlevel
+       \mess{B}{$P_k$}{A}
+       \postlevel
+
+       \mess{B}{$\alpha$}{A}
+       \mess{A}{$\beta$}{B}
+       \node[anchor=west] at (mess to) { $\beta=b||1$ };
+       \postlevel
+       \mess{B}{$\gamma$}{A}
+       \node[anchor=west] at (mess from) { \shortstack[l]{If $\beta[-1]=0,  \gamma=(\alpha \beta)^{S_k}$\\otw $\gamma=S_k$
+       } };
+       \draw [->] (1.1,-5) to[out=240,in=120] (1.2,-3);
+       \postlevel
+       
+       \mess{A}{$\tau^*$}{B}
+       \node[anchor=west] at (mess to) { \shortstack{Output 1 IFF \\
+       $V(P_k,\tau^*)=1$} };
+ 
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+Now that we have $S_k$ we can always create a valid $\tau^*$.
+
+\section{point b}
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{A-ID} $}
+       \newinst[4]{B}{$ \A^{UF-CMA} $}
+       \newinst[4]{C}{$\C^{UF-CMA}$}
+
+       \postlevel
+       \mess{C}{$P_k$}{B}
+       \mess{B}{$P_k$}{A}
+       \postlevel
+
+       \mess{A}{$m_i$}{B}
+       \mess{B}{$m_i$}{C}
+       \mess{C}{$\sigma_i$}{B}
+       \mess{B}{$\sigma_i$}{A}
+       \draw [->] (1.1,-6) to[out=240,in=120] (1.2,-3.3);
+       \postlevel
+       
+       \mess{A}{$\tau^*$}{B}
+       \node[anchor=west] at (mess to) { parse $\tau^*$ };
+       \mess{B}{$m^*,\sigma^*$}{C}
+       \node[anchor=west] at (mess to) { \shortstack{Output 1 IFF \\
+       $Vrf(P_k,\sigma^*,m)=1$} };
+ 
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+\section{point c}
+
+The HVZK property comes from the fact that the signature scheme used in the following way:
+
+\begin{itemize}
+    \item The Verifier sends the message
+    \item The Prover signs the message
+\end{itemize} 
+
+doesn't leak any information about the secret used for signing the message (assuming $A$ always as honest verifier). 

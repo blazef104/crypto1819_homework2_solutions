@@ -1,4 +1,4 @@
-\\chapter*{Exercise 5}
+\mychapter{5}{Exercise 5}
 
 \subsection{point a}
 
@@ -15,14 +15,14 @@ We want to break the following game:
        \postlevel
        
        \mess{A}{$m^*,\sigma^*$}{B}
-       \node[anchor=west] at (mess to) { output 1 IFF $Vrf(\sigma^*,S_k)=m^*$ };
+       \node[anchor=west] at (mess to) { \shortstack{output 1 IFF\\ $Vrf(\sigma^*,S_k)=m^*$} };
 
        \sdend{}
        \sdend{}
     \end{tikzpicture}
 \end{figure}
 
-We win in this way:
+\noindent We win in this way:
 
 \begin{figure}[h!]
     \centering
@@ -129,3 +129,4 @@ We can win in the following way:
        \sdend{}
     \end{tikzpicture}
 \end{figure}
+\todo{Finish the proofs from the pictures}

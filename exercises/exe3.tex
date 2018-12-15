@@ -1,0 +1,111 @@
+\mychapter{3}{Exercise 3}
+\section{point a}
+
+Call $(g,g^a)$ compute $g^{a^2}$ PROBLEM.
+
+\noindent Now we want to prove that PROBLEM $\Leftrightarrow$ CDH
+
+PROBLEM $\implies$ CDH:
+
+Suppose $\exists A^{CDH}$ which is able to break CDH with non negligible probability.
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{CDH} $}
+       \newinst[4]{B}{$ \A^{PROB} $}
+       \newinst[4]{C}{$\C^{PROB}$}
+
+       \postlevel
+       \mess{C}{$(g,g^a)$}{B}
+       \mess{B}{$(g,g^a,g^a)$}{A}
+       \postlevel
+       
+       \mess{A}{$g^{a^2}$}{B}
+       \mess{B}{$g^{a^2}$}{C}
+       
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+CDH $\implies$ PROBLEM
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{PROB} $}
+       \newinst[4]{B}{$ \A^{CDH} $}
+       \newinst[4]{C}{$\C^{CDH}$}
+
+       \postlevel
+       \mess{C}{$(g,g^a,g^b)$}{B}
+       \postlevel
+
+       \mess{B}{$(g,g^a)$}{A}
+       \mess{A}{$g^{a^2}$}{B}
+       \postlevel
+
+       \mess{B}{$(g,g^b)$}{A}
+       \mess{A}{$g^{b^2}$}{B}
+       \postlevel
+
+       \mess{B}{$(g,g^c)$}{A}
+       \node[anchor=west] at (mess from) { $g^c=g^a\times g^b$ };
+       \postlevel
+       
+       \mess{A}{$g^{c^2}$}{B}
+       \postlevel
+
+       \mess{B}{$g^{*}=g^{ab}$}{C}
+       \node[anchor=east] at (mess from) { $g^*=(\frac{g^c}{g^{a^2}g^{b^2}})^\frac{1}{2}$ };
+
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+\section{point b}
+
+\begin{gather*}
+    \begin{cases}
+        N=pq \\
+        \varphi(N)=(p-1)(q-1)=pq-p-q+1
+        \end{cases}
+        \Rightarrow
+    \begin{cases}
+            N=pq\\
+            p+q=N-\varphi(N)+1=\beta 
+    \end{cases}\\
+    \Rightarrow
+    \begin{cases}
+            N=\beta q -q^2 \Rightarrow -q^2+\beta q-N=0\\
+            \beta=N-\varphi(N)+1
+    \end{cases}\\
+    \Rightarrow q^2-\beta q+N=0 \Rightarrow p,q=\frac{\beta \pm \sqrt{\beta^2-4N}}{2}
+\end{gather*}
+
+Now with $N= 18830129$ and $\varphi(N) = 18819060$\\
+
+\begin{gather*}
+    \beta=18830129 - 18819060 +1 = 11070\\
+    \Delta=11070^2-4*18830129=122544900-75320516=47224384\\
+    q_1=\frac{11070+6872}{2}=8971\\
+    q_2=\frac{11070+6872}{2}=2099
+\end{gather*}
+
+\section{point c}
+
+The Bézout’s identity states that it is always possible to find x,y s.t. 
+$ax+by=d$ if GCD(a,b)=d.
+
+Now since $e_A,e_b$ are coprime, GCD($e_A,e_b$)=1 and then we can (using Euclidean algorithm) polinomially retrieve x,y s.t. $e_A x + e_b y =1$.
+
+Since Eve has $e_a,e_b,c_a,c_b$ and also $x,y$ he can calculate $(m^{e_a})^x (m^{e_b})^y=m^{e_A x + e_b y}=m$
+
