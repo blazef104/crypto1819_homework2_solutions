@@ -2,3 +2,11 @@
 \section{point a}
 
 Since PRP in \underline{by definition} computationally close to $U$ breaking CPA security implies to distinguish between the PRP and a uniform distribution.
+
+\todo{Find a correct game}
+
+\section{point b}
+
+Let's construct a contrived PRP family in the following way:
+
+$\forall k, P_k^{-1}(0) = 0^{n/2} || k$ this is still CPA since $A$ cannot do decryption queries however an adversary  playing a CCA game can query the decryption of $0$ and thus obtain the key.
