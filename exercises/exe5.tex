@@ -27,7 +27,7 @@ We want to break the following game:
 \begin{figure}[h!]
     \centering
     \sdinit{}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.9]
        \sdbegin{}
        \postlevel
        \newinst{A}{$ \A $}
@@ -62,7 +62,7 @@ We want to break the following game when $m^*$ is fixed:
        \postlevel
        
        \mess{A}{$m^*,\sigma^*$}{B}
-       \node[anchor=west] at (mess to) { output 1 IFF $Vrf(\sigma^*,S_k)=m^*$ };
+       \node[anchor=west] at (mess to) { \shortstack{output 1 IFF\\ $Vrf(\sigma^*,S_k)=m^*$} };
 
        \sdend{}
        \sdend{}
