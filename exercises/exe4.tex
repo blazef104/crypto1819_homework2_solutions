@@ -1,6 +1,6 @@
 \mychapter{4}{Exercise 4}
 
-\subsection{point a}
+\section{point a}
 
 Formal definition of CCA1. Consider the following $GAME^{CCA}$
 
@@ -38,7 +38,7 @@ $$Pr[A(\lambda, 0)=1]-Pr[A(\lambda,1)=1]$$
 \todo{Put an explanation and finalize probability}
 
 \newpage
-\subsection{point b}
+\section{point b}
 
 CCA1 $\implies$ CPA
 
@@ -120,8 +120,8 @@ The scheme is defined as follows
 \end{figure}
 
 \newpage
-\subsection{point c}
-\subsubsection{point i}
+\section{point c}
+\subsection{point i}
 
 My goal is to demostrate if PI is CCA1 -> PI' is also CCA1, in order to this observe the following reduction scheme:
 
@@ -151,7 +151,7 @@ Consider the following PKE Scheme:
 \end{itemize}
 Since in CCA2 I can make decryption queries after the challenge, I can create a $c'\neq c^*$ just by inverting the first two bits of $c^*$ ($c*=c_1^*||c_2^*||...||c^*_t$ now $c'=c_2^*||c_1^*||...||c^*_t$). Now when I receive the decrypted message I can simply switch the first two bits again and discover which of the two challenge messages was encrypted.
 
-\subsection{point d}
+\section{point d}
 
 From the definition of padded-RSA I can construct the following attack:
 
