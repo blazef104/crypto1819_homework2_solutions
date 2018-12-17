@@ -80,7 +80,7 @@ Consider the following two Games:
 \begin{figure}[h!]
     \centering
     \sdinit{}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.8]
        \sdbegin{}
        \newinst{A}{$ \A^{H^*} $}
        \newinst[4]{B}{$ \A $}
@@ -111,4 +111,4 @@ Consider the following two Games:
     \end{tikzpicture}
 \end{figure}
 
- There is a "BAD event" in which $A^{H^*}$ outputs a collision for $H_{s_1}$, meaning that $H_{s_1}(x)=H_{s_1}(x')$ in this case the second part of the reduction doesn't work. But $Pr[BAD]$ is negligible since 
+ There is a "BAD event" in which $A^{H^*}$ outputs a collision for $H_{s_1}$, meaning that $H_{s_1}(x)=H_{s_1}(x')$ in this case the second part of the reduction doesn't work. But $Pr[BAD]$ is negligible since $H_{s_1}$ is collision resistant by definition. But now $H^*(x')=H^*(x)$ since $x'$ was a collision for $H^*$ but this must be a collision also for $H'_{s_2}$ which was a CRHF for hypothesis.
