@@ -1,7 +1,7 @@
 \mychapter{1}{Exercise 1}
 \section{point a}
 
-Since PRP in \underline{by definition} computationally close to $U$ breaking CPA security implies to distinguish between the PRP and a uniform distribution.
+Since PRP is \underline{by definition} computationally close to $U$ breaking CPA security implies to distinguish between the PRP and a uniform distribution.
 
 \begin{figure}[h!]
     \centering
@@ -50,4 +50,4 @@ $ \underbrace{P[A^{CPA}=0 | PRP]}_{\text{right guess}} - \overbrace{P[A^{CPA}=0 
 
 It is not CCA secure because we can construct a contrived PRP family in the following way:
 
-$\forall k, P_k^{-1}(0) = 0^{n/2} || k$ this is still CPA since $A$ cannot do decryption queries however an adversary  playing a CCA game can query the decryption of $0$ and thus obtain the key (assuming $\lambda \leq $ ).
+$\forall k, P_k^{-1}(0) = 0^{n/2} || k$ this is still CPA since $A$ cannot do decryption queries however an adversary  playing a CCA game can query the decryption of $0$ and thus obtain the key (assuming $\lambda \leq k$ ).

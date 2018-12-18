@@ -53,7 +53,7 @@ This \textbf{BAD} event happens with
 
 \subsection{ii}%
 
-Now if the domain and codomain are both $n$ we want to demonstrate that $CRHF\implies OWF$. Suppose there exists an adversary which is able to break $OWF$ with non negligible prob. Because in the best case (bijective) you will find only one $x$ for any $y$ you will never be able to find a collision. So $CRHF \not\Rightarrow OWF$.
+Intuitively if the function is not compressing ($h:n \to n$) and is collision resistant we can take the best hash function possible (a bijective one). In this case the function will obviously be CRHF since it is impossible to find $x\neq x'$ s.t. $h(x)=h(x')$, however this will not be one way since there will be a unique correspondence between an element in the domain and an element in the codomain.
 
 \notodo{If functions from $\H$ family aren't compressing, the probability of
 \textbf{BAD} event changes:

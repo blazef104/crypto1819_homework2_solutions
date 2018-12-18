@@ -97,8 +97,8 @@ The scheme is defined as follows
        
        \mess{A}{$c_i$}{B}
        \node[anchor=east] at (mess from) { $Enc(P_k,m)=c$ };
-       \mess{B}{$m_i,x$}{A}
-       \node[anchor=west] at (mess from) { $Dec(S_k,c)=m,x$ };
+       \mess{B}{$m_i,S_k$}{A}
+       \node[anchor=west] at (mess from) { $Dec(S_k,c)=m,S_k$ };
        \draw [->] (1.1,-3.3) to[out=220,in=110] (1.2,-2.3);
        \postlevel
        
@@ -110,12 +110,18 @@ The scheme is defined as follows
 
        \mess{A}{$b'$}{B}
        \node[anchor=west] at (mess to) { output 1 IFF $b=b'$ };
-       \node[anchor=east] at (mess from) { check if $m'=m_1$ or $m'=m_0$ };
+       \node[anchor=east] at (mess from) { \shortstack{check if $m'=m_1$\\ or $m'=m_0$} };
 
        \sdend{}
        \sdend{}
     \end{tikzpicture}
 \end{figure}
+
+\textbf{Correctness:}
+
+$Dec(S_k,\underbrace{Enc(P_k,m)}_{c})=m,S_k$
+
+The scheme is still correct since in the decryption query I will still have the message as output + a second member which is the leaked key. 
 
 \newpage
 \section{point c}
