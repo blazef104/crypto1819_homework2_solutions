@@ -50,9 +50,12 @@ This \textbf{BAD} event happens with
 \[
     \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [X=x] \P [ X'=x ] = \frac{1}{2^{2n}}        
 \].
-\subsection{ ii}%
 
-If functions from $\H$ family aren't compressing, the probability of
+\subsection{ii}%
+
+Now if the domain and codomain are both $n$ we want to demonstrate that $CRHF\implies OWF$. Suppose there exists an adversary which is able to break $OWF$ with non negligible prob. Because in the best case (bijective) you will find only one $x$ for any $y$ you will never be able to find a collision. So $CRHF \not\Rightarrow OWF$.
+
+\notodo{If functions from $\H$ family aren't compressing, the probability of
 \textbf{BAD} event changes:
 \[
     \P [ x=x' ]=Col(X, X')=\sum_{x}^{} \P [ X=x \wedge X'=x ]= \sum_{x}^{} \P [X=x] \P [ X'=x ] = \frac{1}{2^{n}}        
@@ -70,7 +73,7 @@ In general, for non-compressing functions we can show that
 \]
 
 with the same reduction of the above \textbf{point i} .
-
+}
 \section{point b}
 
 Given $H_{s_1,s_2}^*(x)=H_{s_2}'(H_{s_1}(x))$ with $H^*:4n \rightarrow n$.

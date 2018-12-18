@@ -113,7 +113,7 @@ We can win in the following way:
        \newinst[4]{B}{$ \C $}
        \postlevel
        
-       \mess{B}{$m*,P_k$}{A}
+       \mess{B}{$m^*,P_k$}{A}
        \node[anchor=west] at (mess from) { $m^*\leftarrow\$ \Z_N^*$ };
        \postlevel
 
@@ -129,4 +129,41 @@ We can win in the following way:
        \sdend{}
     \end{tikzpicture}
 \end{figure}
-\todo{Finish the proofs from the pictures}
+
+\newpage
+Consider the following reduction:
+
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A^{WUFCMA} $}
+       \newinst[4]{B}{$ A $}
+       \newinst[4]{C}{$ \C^{RSA} $}
+       \postlevel
+       
+       \mess{C}{$P_k$}{B}
+       \mess{B}{$m^*,P_k$}{A}
+       \node[anchor=west] at (mess from) { \shortstack{fix $m^*$\\$m^*\leftarrow\$ \Z_N^*$} };
+       \postlevel
+
+       \mess{B}{$m_i$}{C}
+       \mess{C}{$\sigma_i$}{B}
+       \node[anchor=west] at (mess from) { \shortstack{$m_i\leftarrow\$ \Z_N^*$\\$\sigma_i=m_i^{d}mod N$} };
+       \draw [->] (7.1,-5) to[out=240,in=120] (7.2,-4);
+       \postlevel
+       
+       \mess{B}{$m_i, \sigma_i$}{A}
+       \draw [->] (1.3,-6.5) to[out=240,in=120] (1.4,-5.9);
+       \postlevel
+       \mess{A}{$m^*, \sigma^*$}{B}
+       \mess{B}{$m^*, \sigma^*$}{C}
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+So forging a $\sigma^*$ is equivalent to forging on RSA.

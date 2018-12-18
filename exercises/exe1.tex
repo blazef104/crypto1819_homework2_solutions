@@ -3,10 +3,51 @@
 
 Since PRP in \underline{by definition} computationally close to $U$ breaking CPA security implies to distinguish between the PRP and a uniform distribution.
 
-\todo{Find a correct game}
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \newinst{A}{$ \A^{CPA} $}
+       \newinst[4]{B}{$ \A $}
+       \newinst[4]{C}{$\C^{PRP}$}
+
+       \postlevel
+       \mess{A}{$m_i$}{B}
+       \postlevel
+       \mess{B}{$r||m_i$}{C}
+       \node[anchor=east] at (mess from) { $r\leftarrow \$ \{0,1\} ^\frac{n}{2}$};
+       \mess{C}{$c=P_k(r||m)$}{B}
+       \mess{B}{$c=P_k(r||m)$}{A}
+       \draw [->] (1.1,-4.3) to[out=240,in=120] (1.2,-1.5);
+       \postlevel
+
+       \mess{A}{$m_0^*,m_1^*$}{B}
+       \node[anchor=west] at (mess to) { \shortstack{fix $b=0$\\ $r\leftarrow \$ \{0,1\} ^\frac{n}{2}$} };
+       \postlevel
+       \mess{B}{$r||m_0^*$}{C}
+       \postlevel
+       \mess{C}{$c^*$}{B}
+       \postlevel
+       \node[anchor=west] at (mess from) { \shortstack{$c=P_K(r||m_0^*)$ \\ or
+       $c=U_{\lambda}$ } };
+       \mess{B}{$c^*$}{A}
+       \mess{A}{$b'$}{B}
+       \mess{B}{$b''$}{C}
+ 
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
+
+When $A$ receives $b'$ he will check if $b'=b$ then $C^{PRP}$ will have chosen a $PRP$ otherwise $c^*$ will come from $U$. We must consider the case in which $A^{CPA}$ will output $b'=b$ even when $c^*$ comes from Uniform. 
+
+So the final probability will be:
+
+$ \underbrace{P[A^{CPA}=0 | PRP]}_{\text{right guess}} - \overbrace{P[A^{CPA}=0 | U]}^{\text{wrong guess}} = \frac{1}{2}+\epsilon - \frac{1}{2}$
 
 \section{point b}
 
-Let's construct a contrived PRP family in the following way:
+It is not CCA secure because we can construct a contrived PRP family in the following way:
 
-$\forall k, P_k^{-1}(0) = 0^{n/2} || k$ this is still CPA since $A$ cannot do decryption queries however an adversary  playing a CCA game can query the decryption of $0$ and thus obtain the key.
+$\forall k, P_k^{-1}(0) = 0^{n/2} || k$ this is still CPA since $A$ cannot do decryption queries however an adversary  playing a CCA game can query the decryption of $0$ and thus obtain the key (assuming $\lambda \leq $ ).

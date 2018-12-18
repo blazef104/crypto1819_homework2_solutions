@@ -33,9 +33,7 @@ Formal definition of CCA1. Consider the following $GAME^{CCA}$
     \end{tikzpicture}
 \end{figure}
 
-$$Pr[A(\lambda, 0)=1]-Pr[A(\lambda,1)=1]$$
-
-\todo{Put an explanation and finalize probability}
+$$|Pr[A(\lambda, 0)=1]-Pr[A(\lambda,1)=1]|\leq negl(\lambda)$$
 
 \newpage
 \section{point b}
@@ -79,7 +77,7 @@ Assume $\exists \A^{CPA}$ which is able to break $CPA$. $\A^{CCA1}$ will use thi
     \end{tikzpicture}
 \end{figure}
 
-\noindent Intuitively this works because we used CPA to define CCA security. Therefore if an attacker is able to break CPA he is also "automatically" able to break CCA (the challenge part is the same for both games).
+\noindent Intuitively this works because we used CPA to define CCA security. Therefore if an attacker is able to break CPA he is also "automatically" able to break CCA (the challenge part for CPA is the same for CCA).
 
 \bigskip
 $PKE^{CPA} \implies CCA1$
@@ -99,15 +97,15 @@ The scheme is defined as follows
        
        \mess{A}{$c_i$}{B}
        \node[anchor=east] at (mess from) { $Enc(P_k,m)=c$ };
-       \node[anchor=west] at (mess to) { $Dec(S_k,c)=m,x$ };
        \mess{B}{$m_i,x$}{A}
+       \node[anchor=west] at (mess from) { $Dec(S_k,c)=m,x$ };
        \draw [->] (1.1,-3.3) to[out=220,in=110] (1.2,-2.3);
        \postlevel
        
        \mess{A}{$m^*_0,m^*_1$}{B}
        \node[anchor=west] at (mess to) { $b\leftarrow\$ \{0,1\}$ };
        \mess{B}{$c^*$}{A}
-       \node[anchor=east] at (mess to) { $Dec(x,c)=m',x$ };
+       \node[anchor=east] at (mess to) { $Dec(x,c)=m_{b},x$ };
        \postlevel
 
        \mess{A}{$b'$}{B}
@@ -123,24 +121,63 @@ The scheme is defined as follows
 \section{point c}
 \subsection{point i}
 
-My goal is to demostrate if $\Pi$ is $CCA1 \Rightarrow \Pi'$ is also CCA1, in order to do this observe the following reduction scheme:
+My goal is to demonstrate if $\Pi$ is $CCA1 \Rightarrow \Pi'$ is also CCA1, in order to do this observe the following reduction scheme:
 
-$GAME$
-A'(PI')  A  C
+Suppose $\exists A^{\Pi'}$ which is able to break the CCA1 security of $\Pi'$
+\begin{figure}[h!]
+    \centering
+    \sdinit{}
+    \begin{tikzpicture}
+       \sdbegin{}
+       \postlevel
+       \newinst{A}{$ \A^{\Pi'} $}
+       \newinst[4]{B}{$\A$}
+       \newinst[4]{C}{$C$}
+       \postlevel
+       
+       \mess{A}{$c[t]$}{B}
+       \mess{B}{$c_i$}{C}
+       \mess{C}{$m_i$}{B}
+       \draw [->] (6.8,-3.8) to[out=220,in=110] (6.8,-2.9);
+       
+       \mess{B}{$c[t]$}{A}
+       \postlevel
+
+       \mess{A}{$m^*_0,m^*_1$}{B}
+       \node[anchor=west] at (mess to) { fix $b=0$ };
+       \mess{B}{$m^*_0[1,..,t-1]$}{C}
+       \postlevel
+       \mess{B}{$m^*_0[t],1$}{C}
+       \node[anchor=west] at (mess to) { $b^c\leftarrow\$\{0,1\}$ };
+       \mess{C}{$c^{*\prime}$}{B}
+       
+       \mess{B}{$c^*$}{A}       
+       \node[anchor=west] at (mess from) { $c^*=c^*[1,..,t]||c^{*\prime}$ };
+       
+       \postlevel
+
+       \mess{A}{$b'$}{B}
+       \mess{B}{$b''$}{C}
+       \node[anchor=west] at (mess to) { output 1 IFF $b^c=b''$ };
+
+       \sdend{}
+       \sdend{}
+    \end{tikzpicture}
+\end{figure}
 
 
-$A'$ sends a message m composed by 't' elements. A takes every single elements and sends to C to get the cyphertexts of each.
-Then recombines the cyphertext and sends back the single cyphertext to A'.
+$A^{\Pi'}$ sends ciphertext composed by $t$ elements. A takes every single elements and sends to C to get the plaintext of each one.
+Then recombines the plaintext and sends back the single plaintext to $A^{\Pi'}$.
 
-At the start of the challenge, A' sends to messages: m0, m1 of 't' bytes to A.
-A sends to C the t-1 bytes of m0 and receives thr corrispondent t-1 cyphertext then A sends to C two bytes:
-m0t and 1, and receive the cyphertext c*' of one of these.
-At this point A recombines all of the t-1 cyphertext + the last received, c*' and sends back to A'.
-Now if A' distinguishes that c* is the cyphertext of m0 sends b' in the other case C has enrypted the fixed byte and send BOT.
+At the start of the challenge, $A^{\Pi'}$ sends two messages: $m_0$, $m_1$ of $t$ bits to $A$.
+$A$ sends to $C$ the first t-1 bytes of $m_0$ and receives the corresponding $t-1$ ciphertexts then $A$ sends to $C$ the challenge as: $m_0[t]$ and 1, receiving the ciphertext $c*'$ of one of the two.
+At this point A recombines all of the t-1 ciphertext + the last received, $c^{*\prime}$ and sends back to $A^{\Pi}$.
+Now A will just forward the response.
 
-At the end if A receives b', sends b', if receives BOT sends 0.
+The probability will be $|P[A^{\Pi}=0 | b^c=0]-P[A^{\Pi}=0 | b^c=1]|=\frac{1}{2}+negl(\lambda)-\frac{1}{2}>negl(\lambda)$ 
 
-\subsubsection{point ii}
+\newpage
+\subsection{point ii}
 
 $\Pi$ CCA2 $\implies$ $\Pi' \neg$CCA2
 
