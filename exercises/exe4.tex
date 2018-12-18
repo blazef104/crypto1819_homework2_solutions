@@ -163,8 +163,8 @@ Suppose $\exists A^{\Pi'}$ which is able to break the CCA1 security of $\Pi'$
        \postlevel
 
        \mess{A}{$b'$}{B}
-       \mess{B}{$b''$}{C}
-       \node[anchor=west] at (mess to) { output 1 IFF $b^c=b''$ };
+       \mess{B}{$b'$}{C}
+       \node[anchor=west] at (mess to) { output 1 IFF $b^c=b'$ };
 
        \sdend{}
        \sdend{}
@@ -176,7 +176,7 @@ $A^{\Pi'}$ sends ciphertext composed by $t$ elements. A takes every single eleme
 Then recombines the plaintext and sends back the single plaintext to $A^{\Pi'}$.
 
 At the start of the challenge, $A^{\Pi'}$ sends two messages: $m_0$, $m_1$ of $t$ bits to $A$.
-$A$ sends to $C$ the first t-1 bytes of $m_0$ and receives the corresponding $t-1$ ciphertexts then $A$ sends to $C$ the challenge as: $m_0[t]$ and 1, receiving the ciphertext $c*'$ of one of the two.
+$A$ sends to $C$ the first t-1 bytes of $m_0$ and receives the corresponding $t-1$ ciphertexts then $A$ sends to $C$ the challenge as: $m_0[t]$ and 1, receiving the ciphertext $c^{*\prime}$ of one of the two.
 At this point A recombines all of the t-1 ciphertext + the last received, $c^{*\prime}$ and sends back to $A^{\Pi}$.
 Now A will just forward the response.
 
