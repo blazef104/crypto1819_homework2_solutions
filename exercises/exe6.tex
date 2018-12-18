@@ -34,7 +34,7 @@ Active $\implies$ Passive
     \end{tikzpicture}
  \end{figure}
 
-We can construct a $\Pi_BAD$ s.t. Passive $\not\Rightarrow$ Active, where if we play as a dishonest Verifier we can leak the entire $S_k$.
+We can construct a $\Pi_{BAD}$ s.t. Passive $\not\Rightarrow$ Active, where if we play as a dishonest Verifier we can leak the entire $S_k$.
 
 For the passive Game:
 
@@ -136,7 +136,7 @@ Now that we have $S_k$ we can always create a valid $\tau^*$.
        \node[anchor=west] at (mess to) { parse $\tau^*$ };
        \mess{B}{$m^*,\sigma^*$}{C}
        \node[anchor=west] at (mess to) { \shortstack{Output 1 IFF \\
-       $Vrf(P_k,\sigma^*,m)=1$} };
+       $Vrf(P_k,\sigma^*,m^*)=1$} };
  
        \sdend{}
        \sdend{}
