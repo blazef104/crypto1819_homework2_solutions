@@ -109,8 +109,10 @@ So the above ID-scheme has still Passive Security. Instead for the Active Securi
 
 Now that we have $S_k$ we can always create a valid $\tau^*$.
 
+\newpage
 \section{point b}
 
+Suppose $\exists A^{A-ID}$ which is able to break the active security of $\Pi$.
 \begin{figure}[h!]
     \centering
     \sdinit{}
@@ -143,7 +145,6 @@ Now that we have $S_k$ we can always create a valid $\tau^*$.
     \end{tikzpicture}
 \end{figure}
 
-\newpage
 \section{point c}
 
 The HVZK property comes from the fact that the signature scheme used in the following way:
@@ -153,4 +154,4 @@ The HVZK property comes from the fact that the signature scheme used in the foll
     \item The Prover signs the message
 \end{itemize} 
 
-doesn't leak any information about the secret used for signing the message (assuming $V$ always as honest verifier). 
+doesn't leak any information about the secret used for signing the message (assuming $V$ always as honest verifier). For the property of the signature it will never reveal anything about the secret used to generate $\sigma$.

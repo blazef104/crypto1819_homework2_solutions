@@ -79,6 +79,7 @@ Assume $\exists \A^{CPA}$ which is able to break $CPA$. $\A^{CCA1}$ will use thi
 
 \noindent Intuitively this works because we used CPA to define CCA security. Therefore if an attacker is able to break CPA he is also "automatically" able to break CCA (the challenge part for CPA is the same for CCA).
 
+\newpage
 \bigskip
 $PKE^{CPA} \implies CCA1$
 
@@ -198,4 +199,4 @@ Since in CCA2 I can make decryption queries after the challenge, I can create a 
 
 From the definition of padded-RSA I can construct the following attack:
 
-Suppose we do the challenge query, when I receive $C^*$ I will have something in this form: $c^*=(r||m_b)^e mod N$. Now, since RSA is malleable, I can change $C^*$ in order to be able to ask a valid decryption query, therefore $C'=C^*\times(r')^e mod N= ((r||m_b) \times r')^e\neq C^*$. Now when I ask for the decryption of $c'$ I will get $m'=((r||m)r')^{ed}=(r||m)r'$ since I know $r'$ I can simply divide $\frac{m'}{r'}$ and take the last l bits. This was the encrypted message in the challenge. 
+Suppose we do the challenge query, when I receive $c^*$ I will have something in this form: $c^*=(r||m_b)^e mod N$. Now, since RSA is malleable, I can change $C^*$ in order to be able to ask a valid decryption query, therefore $c'=c^*\times(r')^e mod N= ((r||m_b) \times r')^e\neq c^*$. Now when I ask for the decryption of $c'$ I will get $m'=((r||m)r')^{ed}=(r||m)r'$ since I know $r'$ I can simply do $m'\times r^{\prime -1}$ (where $r^{\prime -1}$ is the inverse of $r'$) and take the last $l$ bits. This was the message encrypted in the challenge.  I can always win with probability 1.
